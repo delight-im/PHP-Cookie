@@ -59,6 +59,34 @@ The method calls can also be chained:
 (new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setMaxAge(60 * 60 * 24)->setSameSiteRestriction('Strict')->save();
 ```
 
+### Managing sessions
+
+Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP's built-in `session_start()` function. But additionally, you have access to the improved cookie handling.
+
+Calling `Session::start(...)` with `null` as in
+
+```php
+\Delight\Cookie\Session::start(null);
+```
+
+is equivalent to `session_start()`. So there's no advantage here, yet. But calling
+
+```php
+\Delight\Cookie\Session::start();
+// or
+\Delight\Cookie\Session::start('Lax');
+```
+
+additionally sets the same-site restriction to `Lax` and
+
+```php
+\Delight\Cookie\Session::start('Strict');
+```
+
+sets the same-site restriction to `Strict`.
+
+All three calls respect the settings from PHP's `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
+
 ### Parsing cookies
 
 ```php
