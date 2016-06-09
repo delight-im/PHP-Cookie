@@ -158,21 +158,5 @@ function testEqual($actualValue, $expectedValue) {
 function simulateSetCookie($name, $value = null, $expire = 0, $path = null, $domain = null, $secure = false, $httpOnly = false) {
 	setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 
-	return getAndDeleteHeader();
-}
-
-function getAndDeleteHeader() {
-	$result = null;
-
-	$headers = headers_list();
-	foreach ($headers as $header) {
-		if (substr($header, 0, 10) === 'Set-Cookie') {
-			$result = $header;
-			break;
-		}
-	}
-
-	header_remove('Set-Cookie');
-
-	return $result;
+	return Delight\Http\ResponseHeader::take('Set-Cookie');
 }
