@@ -29,7 +29,7 @@ namespace Delight\Cookie;
  *
  * Alternatively, you can construct an instance of this class, set properties individually, and finally call `save()`
  *
- * Note that cookies must always be set before the HTTP headers are sent to the client, i.e. before the actual output
+ * Note that cookies must always be set before the HTTP headers are sent to the client, i.e. before the actual output starts
  */
 final class Cookie {
 
