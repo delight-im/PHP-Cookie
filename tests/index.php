@@ -114,6 +114,9 @@ testCookie('cookie[two]', 'cookietwo');
 testCookie('cookie[one]', 'cookieone');
 testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setSameSiteRestriction('Strict'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict');
 
+setcookie('hello', 'world', time() + 86400, '/foo/', 'example.com', true, true);
+testEqual(\Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-Cookie')), (new \Delight\Cookie\Cookie('hello'))->setValue('world')->setMaxAge(86400)->setPath('/foo/')->setDomain('example.com')->setHttpOnly(true)->setSecureOnly(true));
+
 echo 'ALL TESTS PASSED'."\n";
 
 // release the output buffer
@@ -158,5 +161,5 @@ function testEqual($actualValue, $expectedValue) {
 function simulateSetCookie($name, $value = null, $expire = 0, $path = null, $domain = null, $secure = false, $httpOnly = false) {
 	setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 
-	return Delight\Http\ResponseHeader::take('Set-Cookie');
+	return \Delight\Http\ResponseHeader::take('Set-Cookie');
 }

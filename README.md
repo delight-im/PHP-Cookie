@@ -59,6 +59,13 @@ The method calls can also be chained:
 (new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setMaxAge(60 * 60 * 24)->setSameSiteRestriction('Strict')->save();
 ```
 
+### Parsing cookies
+
+```php
+$cookieHeader = 'Set-Cookie: test=php.net; expires=Thu, 09-Jun-2016 16:30:32 GMT; Max-Age=3600; path=/~rasmus/; secure';
+$cookieInstance = \Delight\Cookie\Cookie::parse($cookieHeader);
+```
+
 ## Specifications
 
  * [RFC 2109](https://tools.ietf.org/html/rfc2109)

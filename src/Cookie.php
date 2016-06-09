@@ -272,6 +272,55 @@ final class Cookie {
 		return $headerStr;
 	}
 
+	/**
+	 * Parses the given cookie header and returns an equivalent cookie instance
+	 *
+	 * @param string $cookieHeader the cookie header to parse
+	 * @return \Delight\Cookie\Cookie|null the cookie instance or `null`
+	 */
+	public static function parse($cookieHeader) {
+		if (empty($cookieHeader)) {
+			return null;
+		}
+
+		if (preg_match('/^Set-Cookie: (.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
+			if (count($matches) >= 4) {
+				$attributes = explode('; ', $matches[3]);
+
+				$cookie = new self($matches[1]);
+				$cookie->setPath(null);
+				$cookie->setHttpOnly(false);
+				$cookie->setValue($matches[2]);
+
+				foreach ($attributes as $attribute) {
+					if (strcasecmp($attribute, 'HttpOnly') === 0) {
+						$cookie->setHttpOnly(true);
+					}
+					elseif (strcasecmp($attribute, 'Secure') === 0) {
+						$cookie->setSecureOnly(true);
+					}
+					elseif (stripos($attribute, 'Expires=') === 0) {
+						$cookie->setExpiryTime((int) strtotime(substr($attribute, 8)));
+					}
+					elseif (stripos($attribute, 'Domain=') === 0) {
+						$cookie->setDomain(substr($attribute, 7));
+					}
+					elseif (stripos($attribute, 'Path=') === 0) {
+						$cookie->setPath(substr($attribute, 5));
+					}
+				}
+
+				return $cookie;
+			}
+			else {
+				return null;
+			}
+		}
+		else {
+			return null;
+		}
+	}
+
 	private static function isNameValid($name) {
 		if (is_string($name) || is_null($name) || is_int($name) || is_float($name) || is_bool($name)) {
 			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', (string) $name)) {
