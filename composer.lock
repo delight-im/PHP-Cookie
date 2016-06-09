@@ -4,9 +4,46 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1a4bc078627424cb61da464530b0261b",
-    "content-hash": "160efd4e6e1e1389b5aeb996ba4d5318",
-    "packages": [],
+    "hash": "47606b5a9e61606978bd560096a59dd2",
+    "content-hash": "e1e0af56557e23e705b048bf8b20b99d",
+    "packages": [
+        {
+            "name": "delight-im/http",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/delight-im/PHP-HTTP.git",
+                "reference": "08254f6ff30f08c59d6cef31e9d07195498e57f7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/delight-im/PHP-HTTP/zipball/08254f6ff30f08c59d6cef31e9d07195498e57f7",
+                "reference": "08254f6ff30f08c59d6cef31e9d07195498e57f7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Delight\\Http\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "Hypertext Transfer Protocol (HTTP) utilities for PHP",
+            "homepage": "https://github.com/delight-im/PHP-HTTP",
+            "keywords": [
+                "headers",
+                "http",
+                "https"
+            ],
+            "time": "2016-06-09 15:02:05"
+        }
+    ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
