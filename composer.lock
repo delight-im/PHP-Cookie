@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "47606b5a9e61606978bd560096a59dd2",
-    "content-hash": "e1e0af56557e23e705b048bf8b20b99d",
+    "hash": "d71d6bda2b8f82d22d0303aa898d8edb",
+    "content-hash": "6e3975bcae5d4da2c8e79cc6a25d4201",
     "packages": [
         {
             "name": "delight-im/http",
-            "version": "v1.0.0",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/delight-im/PHP-HTTP.git",
-                "reference": "08254f6ff30f08c59d6cef31e9d07195498e57f7"
+                "reference": "2ca9001f047c8b4e1b7ca7281823a1a9437850f8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/delight-im/PHP-HTTP/zipball/08254f6ff30f08c59d6cef31e9d07195498e57f7",
-                "reference": "08254f6ff30f08c59d6cef31e9d07195498e57f7",
+                "url": "https://api.github.com/repos/delight-im/PHP-HTTP/zipball/2ca9001f047c8b4e1b7ca7281823a1a9437850f8",
+                "reference": "2ca9001f047c8b4e1b7ca7281823a1a9437850f8",
                 "shasum": ""
             },
             "require": {
@@ -41,7 +41,7 @@
                 "http",
                 "https"
             ],
-            "time": "2016-06-09 15:02:05"
+            "time": "2016-07-08 21:19:02"
         }
     ],
     "packages-dev": [],
