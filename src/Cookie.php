@@ -368,11 +368,44 @@ final class Cookie {
 		}
 	}
 
-	private static function normalizeDomain($domain) {
-		if (isset($domain[0]) && $domain[0] !== '.') {
-			$domain = '.'.$domain;
+	private static function normalizeDomain($domain, $keepWww = false) {
+		// make sure the domain is actually a string
+		$domain = (string) $domain;
+
+		// if the cookie should be valid for the current host only
+		if ($domain === '') {
+			// no need for further normalization
+			return null;
 		}
 
+		// if the provided domain is actually an IP address
+		if (filter_var($domain, FILTER_VALIDATE_IP) !== false) {
+			// let the cookie be valid for the current host
+			return null;
+		}
+
+		// for local hostnames (which either have no dot at all or a leading dot only)
+		if (strpos($domain, '.') === false || strrpos($domain, '.') === 0) {
+			// let the cookie be valid for the current host while ensuring maximum compatibility
+			return null;
+		}
+
+		// unless the domain already starts with a dot
+		if ($domain[0] !== '.') {
+			// prepend a dot for maximum compatibility (e.g. with RFC 2109)
+			$domain = '.' . $domain;
+		}
+
+		// if a leading `www` subdomain may be dropped
+		if (!$keepWww) {
+			// if the domain name actually starts with a `www` subdomain
+			if (substr($domain, 0, 5) === '.www.') {
+				// strip that subdomain
+				$domain = substr($domain, 4);
+			}
+		}
+
+		// return the normalized domain
 		return $domain;
 	}
 
