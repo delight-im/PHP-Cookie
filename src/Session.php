@@ -37,10 +37,20 @@ final class Session {
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 */
 	public static function start($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
-		// run PHP's built-in `session_start` function
+		// run PHP's built-in equivalent
 		session_start();
 
-		// get and remove the original cookie header set by `session_start` (if any)
+		// intercept the cookie header (if any) and rewrite it
+		self::rewriteCookieHeader($sameSiteRestriction);
+	}
+
+	/**
+	 * Intercepts and rewrites the session cookie header
+	 *
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 */
+	private static function rewriteCookieHeader($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
+		// get and remove the original cookie header set by PHP
 		$originalCookieHeader = ResponseHeader::take('Set-Cookie', session_name().'=');
 
 		// if a cookie header has been found
