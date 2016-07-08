@@ -34,7 +34,7 @@ final class Session {
 	/**
 	 * Starts or resumes a session in a way compatible to PHP's built-in `session_start()` function
 	 *
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not to be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 */
 	public static function start($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in `session_start` function

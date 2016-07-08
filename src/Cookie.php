@@ -50,7 +50,7 @@ final class Cookie {
 	private $httpOnly;
 	/** @var bool indicates that the cookie should be sent back by the client over secure HTTPS connections only */
 	private $secureOnly;
-	/** @var string|null indicates that the cookie should not to be sent along with cross-site requests (either `null`, `Lax` or `Strict`) */
+	/** @var string|null indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`) */
 	private $sameSiteRestriction;
 
 	/**
@@ -157,7 +157,7 @@ final class Cookie {
 	/**
 	 * Sets the same-site restriction for the cookie
 	 *
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not to be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 * @return static this instance for chaining
 	 */
 	public function setSameSiteRestriction($sameSiteRestriction) {
@@ -204,7 +204,7 @@ final class Cookie {
 	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not to be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to set the cookie)
 	 */
 	public static function setcookie($name, $value = null, $expiryTime = 0, $path = null, $domain = null, $secureOnly = false, $httpOnly = false, $sameSiteRestriction = null) {
@@ -223,7 +223,7 @@ final class Cookie {
 	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not to be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 * @return string the HTTP header
 	 */
 	public static function buildCookieHeader($name, $value = null, $expiryTime = 0, $path = null, $domain = null, $secureOnly = false, $httpOnly = false, $sameSiteRestriction = null) {
