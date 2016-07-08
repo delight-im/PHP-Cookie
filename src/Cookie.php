@@ -175,6 +175,21 @@ final class Cookie {
 		return self::setHttpHeader((string) $this);
 	}
 
+	/**
+	 * Deletes the cookie
+	 *
+	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to delete the cookie)
+	 */
+	public function delete() {
+		// create a temporary copy of this cookie so that it isn't corrupted
+		$copiedCookie = clone $this;
+		// set the copied cookie's value to an empty string which internally sets the required options for a deletion
+		$copiedCookie->setValue('');
+
+		// save the copied "deletion" cookie
+		return $copiedCookie->save();
+	}
+
 	public function __toString() {
 		return self::buildCookieHeader($this->name, $this->value, $this->expiryTime, $this->path, $this->domain, $this->secureOnly, $this->httpOnly, $this->sameSiteRestriction);
 	}

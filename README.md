@@ -59,6 +59,14 @@ The method calls can also be chained:
 (new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setMaxAge(60 * 60 * 24)->setSameSiteRestriction('Strict')->save();
 ```
 
+A cookie can later be deleted simply like this:
+
+```php
+$cookie->delete();
+```
+
+**Note:** For the deletion to work, the cookie must have the same settings as the cookie that was originally saved. So you should remember to pass appropriate values to `setPath(...)`, `setDomain(...)`, `setHttpOnly(...)` and `setSecureOnly(...)` again.
+
 ### Managing sessions
 
 Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP's built-in `session_start()` function. But additionally, you have access to the improved cookie handling.
