@@ -319,7 +319,7 @@ final class Cookie {
 						$cookie->setExpiryTime((int) strtotime(substr($attribute, 8)));
 					}
 					elseif (stripos($attribute, 'Domain=') === 0) {
-						$cookie->setDomain(substr($attribute, 7));
+						$cookie->setDomain(substr($attribute, 7), true);
 					}
 					elseif (stripos($attribute, 'Path=') === 0) {
 						$cookie->setPath(substr($attribute, 5));
