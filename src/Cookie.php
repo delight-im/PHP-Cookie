@@ -121,10 +121,11 @@ final class Cookie {
 	 * Sets the domain for the cookie
 	 *
 	 * @param string $domain the domain that the cookie will be valid for (including all subdomains)
+	 * @param bool $keepWww whether a leading `www` subdomain must be preserved or not
 	 * @return static this instance for chaining
 	 */
-	public function setDomain($domain) {
-		$this->domain = self::normalizeDomain($domain);
+	public function setDomain($domain, $keepWww = false) {
+		$this->domain = self::normalizeDomain($domain, $keepWww);
 
 		return $this;
 	}
