@@ -172,7 +172,7 @@ final class Cookie {
 	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to set the cookie)
 	 */
 	public function save() {
-		return self::setHttpHeader((string) $this);
+		return self::addHttpHeader((string) $this);
 	}
 
 	/**
@@ -210,7 +210,7 @@ final class Cookie {
 	public static function setcookie($name, $value = null, $expiryTime = 0, $path = null, $domain = null, $secureOnly = false, $httpOnly = false, $sameSiteRestriction = null) {
 		$cookieHeader = self::buildCookieHeader($name, $value, $expiryTime, $path, $domain, $secureOnly, $httpOnly, $sameSiteRestriction);
 
-		return self::setHttpHeader($cookieHeader);
+		return self::addHttpHeader($cookieHeader);
 	}
 
 	/**
@@ -425,10 +425,10 @@ final class Cookie {
 		return $domain;
 	}
 
-	private static function setHttpHeader($header) {
+	private static function addHttpHeader($header) {
 		if (!headers_sent()) {
 			if (!empty($header)) {
-				header($header);
+				header($header, false);
 
 				return true;
 			}
