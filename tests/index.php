@@ -114,6 +114,14 @@ testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('loc
 testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.localhost'), 'Set-Cookie: key=value; path=/; httponly; SameSite=Lax');
 testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('127.0.0.1'), 'Set-Cookie: key=value; path=/; httponly; SameSite=Lax');
 testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.local'), 'Set-Cookie: key=value; path=/; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('www.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('www.example.com', true), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com', true), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
+testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
 
 setcookie('hello', 'world', time() + 86400, '/foo/', 'example.com', true, true);
 testEqual(\Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-Cookie')), (new \Delight\Cookie\Cookie('hello'))->setValue('world')->setMaxAge(86400)->setPath('/foo/')->setDomain('example.com')->setHttpOnly(true)->setSecureOnly(true));
