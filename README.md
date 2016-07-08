@@ -86,6 +86,24 @@ Using the `Session` class, you can start and resume sessions in a way that is co
 
 All three calls respect the settings from PHP's `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
 
+Likewise, replacements for
+
+```php
+session_regenerate_id()
+// and
+session_regenerate_id(true)
+```
+
+are available via
+
+```php
+\Delight\Cookie\Session::regenerate();
+// and
+\Delight\Cookie\Session::regenerate(true);
+```
+
+if you want protection against session fixation attacks that comes with improved cookie handling.
+
 ### Parsing cookies
 
 ```php

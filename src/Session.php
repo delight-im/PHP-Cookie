@@ -45,6 +45,19 @@ final class Session {
 	}
 
 	/**
+	 * Re-generates the session ID in a way compatible to PHP's built-in `session_regenerate_id()` function
+	 *
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 */
+	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
+		// run PHP's built-in equivalent
+		session_regenerate_id($deleteOldSession);
+
+		// intercept the cookie header (if any) and rewrite it
+		self::rewriteCookieHeader($sameSiteRestriction);
+	}
+
+	/**
 	 * Intercepts and rewrites the session cookie header
 	 *
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
