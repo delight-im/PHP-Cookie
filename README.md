@@ -69,29 +69,20 @@ $cookie->delete();
 
 ### Managing sessions
 
-Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP's built-in `session_start()` function. But additionally, you have access to the improved cookie handling.
-
-Calling `Session::start(...)` with `null` as in
+Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP's built-in `session_start()` function, while having access to the improved cookie handling from this library as well:
 
 ```php
-\Delight\Cookie\Session::start(null);
-```
-
-is equivalent to `session_start()`. So there's no advantage here, yet. But calling
-
-```php
+// start session and have session cookie with 'lax' same-site restriction
 \Delight\Cookie\Session::start();
 // or
 \Delight\Cookie\Session::start('Lax');
-```
 
-additionally sets the same-site restriction to `Lax` and
-
-```php
+// start session and have session cookie with 'strict' same-site restriction
 \Delight\Cookie\Session::start('Strict');
-```
 
-sets the same-site restriction to `Strict`.
+// start session and have session cookie without any same-site restriction
+\Delight\Cookie\Session::start(null);
+```
 
 All three calls respect the settings from PHP's `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
 
