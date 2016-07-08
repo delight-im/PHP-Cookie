@@ -322,8 +322,10 @@ final class Cookie {
 	}
 
 	private static function isNameValid($name) {
-		if (is_string($name) || is_null($name) || is_int($name) || is_float($name) || is_bool($name)) {
-			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', (string) $name)) {
+		$name = (string) $name;
+
+		if ($name !== '') {
+			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', $name)) {
 				return true;
 			}
 		}
