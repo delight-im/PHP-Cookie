@@ -138,7 +138,7 @@ function testEqual($actualValue, $expectedValue) {
 	echo ']';
 	echo "\n";
 
-	if ($actualValue !== $expectedValue) {
+	if (strcasecmp($actualValue, $expectedValue) !== 0) {
 		echo 'FAILED: ';
 		echo '[';
 		echo $actualValue;
