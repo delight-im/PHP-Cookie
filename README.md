@@ -89,9 +89,9 @@ All three calls respect the settings from PHP's `session_set_cookie_params(...)`
 Likewise, replacements for
 
 ```php
-session_regenerate_id()
+session_regenerate_id();
 // and
-session_regenerate_id(true)
+session_regenerate_id(true);
 ```
 
 are available via
