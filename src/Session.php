@@ -94,6 +94,28 @@ final class Session {
 	}
 
 	/**
+	 * Returns the requested value and removes it from the session
+	 *
+	 * This is identical to calling `get` first and then `remove` for the same key
+	 *
+	 * @param string $key the key to retrieve and remove the value for
+	 * @param mixed $defaultValue the default value to return if the requested value cannot be found
+	 * @return mixed the requested value or the default value
+	 */
+	public static function take($key, $defaultValue = null) {
+		if (isset($_SESSION[$key])) {
+			$value = $_SESSION[$key];
+
+			unset($_SESSION[$key]);
+
+			return $value;
+		}
+		else {
+			return $defaultValue;
+		}
+	}
+
+	/**
 	 * Sets the value for the specified key to the given value
 	 *
 	 * Any data that already exists for the specified key will be overwritten

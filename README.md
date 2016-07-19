@@ -146,6 +146,15 @@ session_id();
    \Delight\Cookie\Session::delete($key);
    ```
 
+ * Read *and then* immediately remove a value from the session:
+
+   ```php
+   $value = \Delight\Cookie\Session::take($key);
+   $value = \Delight\Cookie\Session::take($key, $defaultValue);
+   ```
+
+   This is often useful for flash messages, e.g. in combination with the `has(...)` method.
+
 ### Parsing cookies
 
 ```php
