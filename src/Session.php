@@ -68,6 +68,32 @@ final class Session {
 	}
 
 	/**
+	 * Checks whether a value for the specified key exists in the session
+	 *
+	 * @param string $key the key to check
+	 * @return bool whether there is a value for the specified key or not
+	 */
+	public static function has($key) {
+		return isset($_SESSION[$key]);
+	}
+
+	/**
+	 * Returns the requested value from the session or, if not found, the specified default value
+	 *
+	 * @param string $key the key to retrieve the value for
+	 * @param mixed $defaultValue the default value to return if the requested value cannot be found
+	 * @return mixed the requested value or the default value
+	 */
+	public static function get($key, $defaultValue = null) {
+		if (isset($_SESSION[$key])) {
+			return $_SESSION[$key];
+		}
+		else {
+			return $defaultValue;
+		}
+	}
+
+	/**
 	 * Intercepts and rewrites the session cookie header
 	 *
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)

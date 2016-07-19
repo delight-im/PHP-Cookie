@@ -116,6 +116,24 @@ as a replacement for
 session_id();
 ```
 
+### Reading and writing session data
+
+ * Read a value from the session (with optional default value):
+
+   ```php
+   $value = \Delight\Cookie\Session::get($key);
+   // or
+   $value = \Delight\Cookie\Session::get($key, $defaultValue);
+   ```
+
+ * Check whether a value exists in the session:
+
+   ```php
+   if (\Delight\Cookie\Session::has($key)) {
+       // ...
+   }
+   ```
+
 ### Parsing cookies
 
 ```php
