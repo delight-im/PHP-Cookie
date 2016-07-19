@@ -126,12 +126,24 @@ session_id();
    $value = \Delight\Cookie\Session::get($key, $defaultValue);
    ```
 
+ * Write a value to the session:
+
+   ```php
+   \Delight\Cookie\Session::set($key, $value);
+   ```
+
  * Check whether a value exists in the session:
 
    ```php
    if (\Delight\Cookie\Session::has($key)) {
        // ...
    }
+   ```
+
+ * Remove a value from the session:
+
+   ```php
+   \Delight\Cookie\Session::delete($key);
    ```
 
 ### Parsing cookies

@@ -94,6 +94,27 @@ final class Session {
 	}
 
 	/**
+	 * Sets the value for the specified key to the given value
+	 *
+	 * Any data that already exists for the specified key will be overwritten
+	 *
+	 * @param string $key the key to set the value for
+	 * @param mixed $value the value to set
+	 */
+	public static function set($key, $value) {
+		$_SESSION[$key] = $value;
+	}
+
+	/**
+	 * Removes the value for the specified key from the session
+	 *
+	 * @param string $key the key to remove the value for
+	 */
+	public static function delete($key) {
+		unset($_SESSION[$key]);
+	}
+
+	/**
 	 * Intercepts and rewrites the session cookie header
 	 *
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
