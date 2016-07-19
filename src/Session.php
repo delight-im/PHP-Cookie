@@ -45,6 +45,15 @@ final class Session {
 	}
 
 	/**
+	 * Returns the ID of the current session
+	 *
+	 * @return string the session ID or an empty string
+	 */
+	public static function id() {
+		return session_id();
+	}
+
+	/**
 	 * Re-generates the session ID in a way compatible to PHP's built-in `session_regenerate_id()` function
 	 *
 	 * @param bool $deleteOldSession whether to delete the old session or not

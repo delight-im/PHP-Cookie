@@ -104,6 +104,18 @@ are available via
 
 if you want protection against session fixation attacks that comes with improved cookie handling.
 
+Additionally, access to the current internal session ID is provided via
+
+```php
+\Delight\Cookie\Session::id();
+```
+
+as a replacement for
+
+```php
+session_id();
+```
+
 ### Parsing cookies
 
 ```php
