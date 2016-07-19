@@ -47,6 +47,7 @@ final class Session {
 	/**
 	 * Re-generates the session ID in a way compatible to PHP's built-in `session_regenerate_id()` function
 	 *
+	 * @param bool $deleteOldSession whether to delete the old session or not
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
 	 */
 	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
