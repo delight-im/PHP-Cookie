@@ -37,6 +37,12 @@ final class Session {
 	/**
 	 * Returns or sets the ID of the current session
 	 *
+	 * In order to change the current session ID, pass the new ID as the only argument to this method
+	 *
+	 * Please note that there is rarely a need for the version of this method that *updates* the ID
+	 *
+	 * For most purposes, you may find the method `regenerate` from this same class more helpful
+	 *
 	 * @param string|null $newId (optional) a new session ID to replace the current session ID
 	 * @return string the (old) session ID or an empty string
 	 */
