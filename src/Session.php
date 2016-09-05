@@ -41,7 +41,12 @@ final class Session {
 	 * @return string the (old) session ID or an empty string
 	 */
 	public static function id($newId = null) {
-		return session_id($newId);
+		if ($newId === null) {
+			return session_id();
+		}
+		else {
+			return session_id($newId);
+		}
 	}
 
 	/**
