@@ -35,12 +35,14 @@ final class Session {
 	}
 
 	/**
-	 * Returns the ID of the current session
+	 * Set or return the ID of the current session.
 	 *
+	 * @param string $id An optional existing session ID
+	 * 
 	 * @return string the session ID or an empty string
 	 */
-	public static function id() {
-		return session_id();
+	public static function id($id = null) {
+		return session_id($id);
 	}
 
 	/**
