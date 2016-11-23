@@ -34,7 +34,7 @@ final class Cookie {
 	private $expiryTime;
 	/** @var string the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory */
 	private $path;
-	/** @var string the domain that the cookie will be valid for (including all subdomains) */
+	/** @var string|null the domain that the cookie will be valid for (including all subdomains) */
 	private $domain;
 	/** @var bool indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages */
 	private $httpOnly;
