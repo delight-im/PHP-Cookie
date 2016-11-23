@@ -60,6 +60,24 @@ final class Cookie {
 	}
 
 	/**
+	 * Returns the name of the cookie
+	 *
+	 * @return string the name of the cookie which is also the key for future accesses via `$_COOKIE[...]`
+	 */
+	public function getName() {
+		return $this->name;
+	}
+
+	/**
+	 * Returns the value of the cookie
+	 *
+	 * @return mixed|null the value of the cookie that will be stored on the client's machine
+	 */
+	public function getValue() {
+		return $this->value;
+	}
+
+	/**
 	 * Sets the value for the cookie
 	 *
 	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
@@ -69,6 +87,15 @@ final class Cookie {
 		$this->value = $value;
 
 		return $this;
+	}
+
+	/**
+	 * Returns the expiry time of the cookie
+	 *
+	 * @return int the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
+	 */
+	public function getExpiryTime() {
+		return $this->expiryTime;
 	}
 
 	/**
@@ -84,6 +111,15 @@ final class Cookie {
 	}
 
 	/**
+	 * Returns the maximum age of the cookie (i.e. the remaining lifetime)
+	 *
+	 * @return int the maximum age of the cookie in seconds
+	 */
+	public function getMaxAge() {
+		return $this->expiryTime - time();
+	}
+
+	/**
 	 * Sets the expiry time for the cookie based on the specified maximum age (i.e. the remaining lifetime)
 	 *
 	 * @param int $maxAge the maximum age for the cookie in seconds
@@ -96,6 +132,15 @@ final class Cookie {
 	}
 
 	/**
+	 * Returns the path of the cookie
+	 *
+	 * @return string the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
+	 */
+	public function getPath() {
+		return $this->path;
+	}
+
+	/**
 	 * Sets the path for the cookie
 	 *
 	 * @param string $path the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
@@ -105,6 +150,15 @@ final class Cookie {
 		$this->path = $path;
 
 		return $this;
+	}
+
+	/**
+	 * Returns the domain of the cookie
+	 *
+	 * @return string|null the domain that the cookie will be valid for (including all subdomains)
+	 */
+	public function getDomain() {
+		return $this->domain;
 	}
 
 	/**
@@ -121,6 +175,15 @@ final class Cookie {
 	}
 
 	/**
+	 * Returns whether the cookie should be accessible through HTTP only
+	 *
+	 * @return bool whether the cookie should be accessible through the HTTP protocol only and not through scripting languages
+	 */
+	public function isHttpOnly() {
+		return $this->httpOnly;
+	}
+
+	/**
 	 * Sets whether the cookie should be accessible through HTTP only
 	 *
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
@@ -133,6 +196,15 @@ final class Cookie {
 	}
 
 	/**
+	 * Returns whether the cookie should be sent over HTTPS only
+	 *
+	 * @return bool whether the cookie should be sent back by the client over secure HTTPS connections only
+	 */
+	public function isSecureOnly() {
+		return $this->secureOnly;
+	}
+
+	/**
 	 * Sets whether the cookie should be sent over HTTPS only
 	 *
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
@@ -142,6 +214,15 @@ final class Cookie {
 		$this->secureOnly = $secureOnly;
 
 		return $this;
+	}
+
+	/**
+	 * Returns the same-site restriction of the cookie
+	 *
+	 * @return string|null whether the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 */
+	public function getSameSiteRestriction() {
+		return $this->sameSiteRestriction;
 	}
 
 	/**
