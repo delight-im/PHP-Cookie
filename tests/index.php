@@ -120,6 +120,16 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 
 testEqual($cookie, (new \Delight\Cookie\Cookie('hello'))->setValue('world')->setMaxAge(86400)->setPath('/foo/')->setDomain('example.com')->setHttpOnly(true)->setSecureOnly(true));
 
+($cookie->getName() === 'hello') or fail(__LINE__);
+($cookie->getValue() === 'world') or fail(__LINE__);
+($cookie->getExpiryTime() === time() + 86400) or fail(__LINE__);
+($cookie->getMaxAge() === 86400) or fail(__LINE__);
+($cookie->getPath() === '/foo/') or fail(__LINE__);
+($cookie->getDomain() === '.example.com') or fail(__LINE__);
+($cookie->isHttpOnly() === true) or fail(__LINE__);
+($cookie->isSecureOnly() === true) or fail(__LINE__);
+($cookie->getSameSiteRestriction() === \Delight\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) or fail(__LINE__);
+
 /* END TEST COOKIES */
 
 /* BEGIN TEST SESSION */
@@ -220,4 +230,8 @@ function simulateSetCookie($name, $value = null, $expire = 0, $path = null, $dom
 	setcookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 
 	return \Delight\Http\ResponseHeader::take('Set-Cookie');
+}
+
+function fail($lineNumber) {
+	exit('Error in line '.$lineNumber);
 }
