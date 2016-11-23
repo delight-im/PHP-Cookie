@@ -30,7 +30,7 @@ final class Cookie {
 	private $name;
 	/** @var mixed|null the value of the cookie that will be stored on the client's machine */
 	private $value;
-	/** @var int the Unix timestamp indicating the time that the cookie will expire, i.e. usually `time() + $seconds` */
+	/** @var int the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds` */
 	private $expiryTime;
 	/** @var string the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory */
 	private $path;
@@ -74,7 +74,7 @@ final class Cookie {
 	/**
 	 * Sets the expiry time for the cookie
 	 *
-	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire, i.e. usually `time() + $seconds`
+	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
 	 * @return static this instance for chaining
 	 */
 	public function setExpiryTime($expiryTime) {
@@ -84,7 +84,7 @@ final class Cookie {
 	}
 
 	/**
-	 * Sets the expiry time for the cookie based on the specified maximum age
+	 * Sets the expiry time for the cookie based on the specified maximum age (i.e. the remaining lifetime)
 	 *
 	 * @param int $maxAge the maximum age for the cookie in seconds
 	 * @return static this instance for chaining
@@ -189,7 +189,7 @@ final class Cookie {
 	 *
 	 * @param string $name the name of the cookie which is also the key for future accesses via `$_COOKIE[...]`
 	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
-	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire, i.e. usually `time() + $seconds`
+	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
 	 * @param string|null $path the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
 	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
@@ -208,7 +208,7 @@ final class Cookie {
 	 *
 	 * @param string $name the name of the cookie which is also the key for future accesses via `$_COOKIE[...]`
 	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
-	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire, i.e. usually `time() + $seconds`
+	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
 	 * @param string|null $path the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
 	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
