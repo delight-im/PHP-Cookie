@@ -28,7 +28,7 @@ final class Cookie {
 
 	/** @var string the name of the cookie which is also the key for future accesses via `$_COOKIE[...]` */
 	private $name;
-	/** @var mixed the value of the cookie that will be stored on the client's machine */
+	/** @var mixed|null the value of the cookie that will be stored on the client's machine */
 	private $value;
 	/** @var int the Unix timestamp indicating the time that the cookie will expire, i.e. usually `time() + $seconds` */
 	private $expiryTime;
@@ -62,7 +62,7 @@ final class Cookie {
 	/**
 	 * Sets the value for the cookie
 	 *
-	 * @param mixed $value the value of the cookie that will be stored on the client's machine
+	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
 	 * @return static this instance for chaining
 	 */
 	public function setValue($value) {
