@@ -2,7 +2,7 @@
 	"name": "delight-im/cookie",
 	"description": "Modern cookie management for PHP",
 	"require": {
-		"php": ">=5.3.0",
+		"php": ">=5.6.0",
 		"delight-im/http": "^2.0"
 	},
 	"type": "library",
