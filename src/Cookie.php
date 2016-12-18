@@ -411,7 +411,7 @@ final class Cookie {
 	private static function isNameValid($name) {
 		$name = (string) $name;
 
-		if ($name !== '') {
+		if ($name !== '' || version_compare(phpversion(), '7.0.0', '<')) {
 			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', $name)) {
 				return true;
 			}
