@@ -192,6 +192,7 @@ echo 'ALL TESTS PASSED'."\n";
 
 function testCookie($name, $value = null, $expire = 0, $path = null, $domain = null, $secure = false, $httpOnly = false) {
 	$actualValue = \Delight\Cookie\Cookie::buildCookieHeader($name, $value, $expire, $path, $domain, $secure, $httpOnly);
+
 	if (is_null($actualValue)) {
 		$expectedValue = @simulateSetCookie($name, $value, $expire, $path, $domain, $secure, $httpOnly);
 	}
