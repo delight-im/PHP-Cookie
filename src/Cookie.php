@@ -430,7 +430,17 @@ final class Cookie {
 			return 0;
 		}
 		else {
-			return $expiryTime - time();
+			$maxAge = $expiryTime - time();
+
+			// The value of the `Max-Age` property must not be negative on PHP 7.0.19+ (< 7.1) and
+			// PHP 7.1.5+ (https://bugs.php.net/bug.php?id=72071).
+			if ((\PHP_VERSION_ID >= 70019 && \PHP_VERSION_ID < 70100) || \PHP_VERSION_ID >= 70105) {
+				if ($maxAge < 0) {
+					$maxAge = 0;
+				}
+			}
+
+			return $maxAge;
 		}
 	}
 
