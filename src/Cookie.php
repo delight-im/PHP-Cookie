@@ -329,8 +329,10 @@ final class Cookie {
 			$headerStr .= '; expires='.$expiryTimeStr;
 		}
 
-		if (!is_null($maxAgeStr)) {
-			$headerStr .= '; Max-Age='.$maxAgeStr;
+		if (version_compare(phpversion(), '5.5.0', '>=')) {
+			if (!is_null($maxAgeStr)) {
+				$headerStr .= '; Max-Age='.$maxAgeStr;
+			}
 		}
 
 		if (!empty($path) || $path === 0) {
