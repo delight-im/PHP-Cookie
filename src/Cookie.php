@@ -23,6 +23,7 @@ namespace Delight\Cookie;
  */
 final class Cookie {
 
+	const HEADER_PREFIX = 'Set-Cookie: ';
 	const SAME_SITE_RESTRICTION_LAX = 'Lax';
 	const SAME_SITE_RESTRICTION_STRICT = 'Strict';
 
@@ -323,7 +324,7 @@ final class Cookie {
 		$maxAgeStr = self::formatMaxAge($expiryTime, $forceShowExpiry);
 		$expiryTimeStr = self::formatExpiryTime($expiryTime, $forceShowExpiry);
 
-		$headerStr = 'Set-Cookie: '.$name.'='.urlencode($value);
+		$headerStr = self::HEADER_PREFIX . $name . '=' . \urlencode($value);
 
 		if (!is_null($expiryTimeStr)) {
 			$headerStr .= '; expires='.$expiryTimeStr;
@@ -373,7 +374,7 @@ final class Cookie {
 			return null;
 		}
 
-		if (preg_match('/^Set-Cookie: (.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
+		if (preg_match('/^' . self::HEADER_PREFIX . '(.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
 			if (count($matches) >= 4) {
 				$attributes = explode('; ', $matches[3]);
 
