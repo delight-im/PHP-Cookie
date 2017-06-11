@@ -411,6 +411,7 @@ final class Cookie {
 	private static function isNameValid($name) {
 		$name = (string) $name;
 
+		// The name of a cookie must not be empty on PHP 7+ (https://bugs.php.net/bug.php?id=69523).
 		if ($name !== '' || \PHP_VERSION_ID < 70000) {
 			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', $name)) {
 				return true;
