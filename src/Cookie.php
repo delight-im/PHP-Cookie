@@ -329,8 +329,11 @@ final class Cookie {
 			$headerStr .= '; expires='.$expiryTimeStr;
 		}
 
-		if (!is_null($maxAgeStr)) {
-			$headerStr .= '; Max-Age='.$maxAgeStr;
+		// The `Max-Age` property is supported on PHP 5.5+ only (https://bugs.php.net/bug.php?id=23955).
+		if (\PHP_VERSION_ID >= 50500) {
+			if (!is_null($maxAgeStr)) {
+				$headerStr .= '; Max-Age='.$maxAgeStr;
+			}
 		}
 
 		if (!empty($path) || $path === 0) {
