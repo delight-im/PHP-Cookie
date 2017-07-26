@@ -381,7 +381,9 @@ final class Cookie {
 				$cookie = new self($matches[1]);
 				$cookie->setPath(null);
 				$cookie->setHttpOnly(false);
-				$cookie->setValue($matches[2]);
+				$cookie->setValue(
+					\urldecode($matches[2])
+				);
 
 				foreach ($attributes as $attribute) {
 					if (strcasecmp($attribute, 'HttpOnly') === 0) {
