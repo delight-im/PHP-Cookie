@@ -117,7 +117,7 @@ final class Cookie {
 	 * @return int the maximum age of the cookie in seconds
 	 */
 	public function getMaxAge() {
-		return $this->expiryTime - time();
+		return $this->expiryTime - \time();
 	}
 
 	/**
@@ -127,7 +127,7 @@ final class Cookie {
 	 * @return static this instance for chaining
 	 */
 	public function setMaxAge($maxAge) {
-		$this->expiryTime = time() + $maxAge;
+		$this->expiryTime = \time() + $maxAge;
 
 		return $this;
 	}
@@ -315,7 +315,7 @@ final class Cookie {
 
 		$forceShowExpiry = false;
 
-		if (is_null($value) || $value === false || $value === '') {
+		if (\is_null($value) || $value === false || $value === '') {
 			$value = 'deleted';
 			$expiryTime = 0;
 			$forceShowExpiry = true;
@@ -326,23 +326,23 @@ final class Cookie {
 
 		$headerStr = self::HEADER_PREFIX . $name . '=' . \urlencode($value);
 
-		if (!is_null($expiryTimeStr)) {
-			$headerStr .= '; expires='.$expiryTimeStr;
+		if (!\is_null($expiryTimeStr)) {
+			$headerStr .= '; expires=' . $expiryTimeStr;
 		}
 
 		// The `Max-Age` property is supported on PHP 5.5+ only (https://bugs.php.net/bug.php?id=23955).
 		if (\PHP_VERSION_ID >= 50500) {
-			if (!is_null($maxAgeStr)) {
-				$headerStr .= '; Max-Age='.$maxAgeStr;
+			if (!\is_null($maxAgeStr)) {
+				$headerStr .= '; Max-Age=' . $maxAgeStr;
 			}
 		}
 
 		if (!empty($path) || $path === 0) {
-			$headerStr .= '; path='.$path;
+			$headerStr .= '; path=' . $path;
 		}
 
 		if (!empty($domain) || $domain === 0) {
-			$headerStr .= '; domain='.$domain;
+			$headerStr .= '; domain=' . $domain;
 		}
 
 		if ($secureOnly) {
@@ -374,9 +374,9 @@ final class Cookie {
 			return null;
 		}
 
-		if (preg_match('/^' . self::HEADER_PREFIX . '(.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
-			if (count($matches) >= 4) {
-				$attributes = explode('; ', $matches[3]);
+		if (\preg_match('/^' . self::HEADER_PREFIX . '(.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
+			if (\count($matches) >= 4) {
+				$attributes = \explode('; ', $matches[3]);
 
 				$cookie = new self($matches[1]);
 				$cookie->setPath(null);
@@ -386,20 +386,20 @@ final class Cookie {
 				);
 
 				foreach ($attributes as $attribute) {
-					if (strcasecmp($attribute, 'HttpOnly') === 0) {
+					if (\strcasecmp($attribute, 'HttpOnly') === 0) {
 						$cookie->setHttpOnly(true);
 					}
-					elseif (strcasecmp($attribute, 'Secure') === 0) {
+					elseif (\strcasecmp($attribute, 'Secure') === 0) {
 						$cookie->setSecureOnly(true);
 					}
-					elseif (stripos($attribute, 'Expires=') === 0) {
-						$cookie->setExpiryTime((int) strtotime(substr($attribute, 8)));
+					elseif (\stripos($attribute, 'Expires=') === 0) {
+						$cookie->setExpiryTime((int) \strtotime(\substr($attribute, 8)));
 					}
-					elseif (stripos($attribute, 'Domain=') === 0) {
-						$cookie->setDomain(substr($attribute, 7), true);
+					elseif (\stripos($attribute, 'Domain=') === 0) {
+						$cookie->setDomain(\substr($attribute, 7), true);
 					}
-					elseif (stripos($attribute, 'Path=') === 0) {
-						$cookie->setPath(substr($attribute, 5));
+					elseif (\stripos($attribute, 'Path=') === 0) {
+						$cookie->setPath(\substr($attribute, 5));
 					}
 				}
 
@@ -419,7 +419,7 @@ final class Cookie {
 
 		// The name of a cookie must not be empty on PHP 7+ (https://bugs.php.net/bug.php?id=69523).
 		if ($name !== '' || \PHP_VERSION_ID < 70000) {
-			if (!preg_match('/[=,; \\t\\r\\n\\013\\014]/', $name)) {
+			if (!\preg_match('/[=,; \\t\\r\\n\\013\\014]/', $name)) {
 				return true;
 			}
 		}
@@ -428,7 +428,7 @@ final class Cookie {
 	}
 
 	private static function isExpiryTimeValid($expiryTime) {
-		return is_numeric($expiryTime) || is_null($expiryTime) || is_bool($expiryTime);
+		return \is_numeric($expiryTime) || \is_null($expiryTime) || \is_bool($expiryTime);
 	}
 
 	private static function calculateMaxAge($expiryTime) {
@@ -436,7 +436,7 @@ final class Cookie {
 			return 0;
 		}
 		else {
-			$maxAge = $expiryTime - time();
+			$maxAge = $expiryTime - \time();
 
 			// The value of the `Max-Age` property must not be negative on PHP 7.0.19+ (< 7.1) and
 			// PHP 7.1.5+ (https://bugs.php.net/bug.php?id=72071).
@@ -456,7 +456,7 @@ final class Cookie {
 				$expiryTime = 1;
 			}
 
-			return gmdate('D, d-M-Y H:i:s T', $expiryTime);
+			return \gmdate('D, d-M-Y H:i:s T', $expiryTime);
 		}
 		else {
 			return null;
@@ -483,13 +483,13 @@ final class Cookie {
 		}
 
 		// if the provided domain is actually an IP address
-		if (filter_var($domain, FILTER_VALIDATE_IP) !== false) {
+		if (\filter_var($domain, \FILTER_VALIDATE_IP) !== false) {
 			// let the cookie be valid for the current host
 			return null;
 		}
 
 		// for local hostnames (which either have no dot at all or a leading dot only)
-		if (strpos($domain, '.') === false || strrpos($domain, '.') === 0) {
+		if (\strpos($domain, '.') === false || \strrpos($domain, '.') === 0) {
 			// let the cookie be valid for the current host while ensuring maximum compatibility
 			return null;
 		}
@@ -503,9 +503,9 @@ final class Cookie {
 		// if a leading `www` subdomain may be dropped
 		if (!$keepWww) {
 			// if the domain name actually starts with a `www` subdomain
-			if (substr($domain, 0, 5) === '.www.') {
+			if (\substr($domain, 0, 5) === '.www.') {
 				// strip that subdomain
-				$domain = substr($domain, 4);
+				$domain = \substr($domain, 4);
 			}
 		}
 
@@ -514,9 +514,9 @@ final class Cookie {
 	}
 
 	private static function addHttpHeader($header) {
-		if (!headers_sent()) {
+		if (!\headers_sent()) {
 			if (!empty($header)) {
-				header($header, false);
+				\header($header, false);
 
 				return true;
 			}

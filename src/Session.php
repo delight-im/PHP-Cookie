@@ -28,7 +28,7 @@ final class Session {
 	 */
 	public static function start($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
-		session_start();
+		\session_start();
 
 		// intercept the cookie header (if any) and rewrite it
 		self::rewriteCookieHeader($sameSiteRestriction);
@@ -48,10 +48,10 @@ final class Session {
 	 */
 	public static function id($newId = null) {
 		if ($newId === null) {
-			return session_id();
+			return \session_id();
 		}
 		else {
-			return session_id($newId);
+			return \session_id($newId);
 		}
 	}
 
@@ -63,7 +63,7 @@ final class Session {
 	 */
 	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
-		session_regenerate_id($deleteOldSession);
+		\session_regenerate_id($deleteOldSession);
 
 		// intercept the cookie header (if any) and rewrite it
 		self::rewriteCookieHeader($sameSiteRestriction);
@@ -145,7 +145,7 @@ final class Session {
 	 */
 	private static function rewriteCookieHeader($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// get and remove the original cookie header set by PHP
-		$originalCookieHeader = ResponseHeader::take('Set-Cookie', session_name().'=');
+		$originalCookieHeader = ResponseHeader::take('Set-Cookie', \session_name() . '=');
 
 		// if a cookie header has been found
 		if (isset($originalCookieHeader)) {
