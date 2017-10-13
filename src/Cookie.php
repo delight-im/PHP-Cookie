@@ -414,6 +414,32 @@ final class Cookie {
 		}
 	}
 
+	/**
+	 * Checks whether a cookie with the specified name exists
+	 *
+	 * @param string $name the name of the cookie to check
+	 * @return bool whether there is a cookie with the specified name
+	 */
+	public static function exists($name) {
+		return isset($_COOKIE[$name]);
+	}
+
+	/**
+	 * Returns the value from the requested cookie or, if not found, the specified default value
+	 *
+	 * @param string $name the name of the cookie to retrieve the value from
+	 * @param mixed $defaultValue the default value to return if the requested cookie cannot be found
+	 * @return mixed the value from the requested cookie or the default value
+	 */
+	public static function get($name, $defaultValue = null) {
+		if (isset($_COOKIE[$name])) {
+			return $_COOKIE[$name];
+		}
+		else {
+			return $defaultValue;
+		}
+	}
+
 	private static function isNameValid($name) {
 		$name = (string) $name;
 
