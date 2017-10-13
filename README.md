@@ -24,7 +24,7 @@ Modern cookie management for PHP
 
 ### Static method
 
-This library provides a static method that is compatible to PHP's built-in `setcookie(...)` function but includes support for more recent features such as the [`SameSite`](https://tools.ietf.org/html/draft-west-first-party-cookies-07) attribute:
+This library provides a static method that is compatible to PHP’s built-in `setcookie(...)` function but includes support for more recent features such as the [`SameSite`](https://tools.ietf.org/html/draft-west-first-party-cookies-07) attribute:
 
 ```php
 \Delight\Cookie\Cookie::setcookie('SID', '31d4d96e407aad42');
@@ -66,7 +66,7 @@ $cookie->delete();
 
 ### Managing sessions
 
-Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP's built-in `session_start()` function, while having access to the improved cookie handling from this library as well:
+Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP’s built-in `session_start()` function, while having access to the improved cookie handling from this library as well:
 
 ```php
 // start session and have session cookie with 'lax' same-site restriction
@@ -81,7 +81,7 @@ Using the `Session` class, you can start and resume sessions in a way that is co
 \Delight\Cookie\Session::start(null);
 ```
 
-All three calls respect the settings from PHP's `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
+All three calls respect the settings from PHP’s `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
 
 Likewise, replacements for
 
