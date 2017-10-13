@@ -64,6 +64,22 @@ $cookie->delete();
 
 **Note:** For the deletion to work, the cookie must have the same settings as the cookie that was originally saved. So you should remember to pass appropriate values to `setPath(...)`, `setDomain(...)`, `setHttpOnly(...)` and `setSecureOnly(...)` again.
 
+### Reading cookies
+
+ * Checking whether a cookie exists:
+
+   ```php
+   \Delight\Cookie\Cookie::exists('first_visit');
+   ```
+
+ * Reading a cookie’s value (with optional default value):
+
+   ```php
+   \Delight\Cookie\Cookie::get('first_visit');
+   // or
+   \Delight\Cookie\Cookie::get('first_visit', \time());
+   ```
+
 ### Managing sessions
 
 Using the `Session` class, you can start and resume sessions in a way that is compatible to PHP’s built-in `session_start()` function, while having access to the improved cookie handling from this library as well:
