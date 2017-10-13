@@ -130,6 +130,13 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 ($cookie->isSecureOnly() === true) or \fail(__LINE__);
 ($cookie->getSameSiteRestriction() === \Delight\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) or \fail(__LINE__);
 
+\testEqual(\Delight\Cookie\Cookie::exists('SESSID'), isset($_COOKIE['SESSID']));
+\testEqual(\Delight\Cookie\Cookie::exists('other'), isset($_COOKIE['other']));
+\testEqual(\Delight\Cookie\Cookie::get('SESSID'), (isset($_COOKIE['SESSID']) ? $_COOKIE['SESSID'] : null));
+\testEqual(\Delight\Cookie\Cookie::get('SESSID', 42), (isset($_COOKIE['SESSID']) ? $_COOKIE['SESSID'] : 42));
+\testEqual(\Delight\Cookie\Cookie::get('other'), (isset($_COOKIE['other']) ? $_COOKIE['other'] : null));
+\testEqual(\Delight\Cookie\Cookie::get('other', 42), (isset($_COOKIE['other']) ? $_COOKIE['other'] : 42));
+
 /* END TEST COOKIES */
 
 /* BEGIN TEST SESSION */
