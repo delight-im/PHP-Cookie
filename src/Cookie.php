@@ -54,7 +54,7 @@ final class Cookie {
 		$this->value = null;
 		$this->expiryTime = 0;
 		$this->path = '/';
-		$this->domain = self::normalizeDomain($_SERVER['HTTP_HOST']);
+		$this->domain = null;
 		$this->httpOnly = true;
 		$this->secureOnly = false;
 		$this->sameSiteRestriction = self::SAME_SITE_RESTRICTION_LAX;
