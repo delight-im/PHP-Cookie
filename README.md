@@ -20,6 +20,10 @@ Modern cookie management for PHP
     require __DIR__ . '/vendor/autoload.php';
     ```
 
+## Upgrading
+
+Migrating from an earlier version of this project? See our [upgrade guide](Migration.md) for help.
+
 ## Usage
 
 ### Static method
