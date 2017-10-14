@@ -35,7 +35,7 @@ final class Cookie {
 	private $expiryTime;
 	/** @var string the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory */
 	private $path;
-	/** @var string|null the domain that the cookie will be valid for (including all subdomains) */
+	/** @var string|null the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains) */
 	private $domain;
 	/** @var bool indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages */
 	private $httpOnly;
@@ -156,7 +156,7 @@ final class Cookie {
 	/**
 	 * Returns the domain of the cookie
 	 *
-	 * @return string|null the domain that the cookie will be valid for (including all subdomains)
+	 * @return string|null the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains)
 	 */
 	public function getDomain() {
 		return $this->domain;
@@ -165,11 +165,11 @@ final class Cookie {
 	/**
 	 * Sets the domain for the cookie
 	 *
-	 * @param string $domain the domain that the cookie will be valid for (including all subdomains)
+	 * @param string|null $domain the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains)
 	 * @param bool $keepWww whether a leading `www` subdomain must be preserved or not
 	 * @return static this instance for chaining
 	 */
-	public function setDomain($domain, $keepWww = false) {
+	public function setDomain($domain = null, $keepWww = false) {
 		$this->domain = self::normalizeDomain($domain, $keepWww);
 
 		return $this;
@@ -273,7 +273,7 @@ final class Cookie {
 	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
 	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
 	 * @param string|null $path the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
-	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
+	 * @param string|null $domain the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
@@ -292,7 +292,7 @@ final class Cookie {
 	 * @param mixed|null $value the value of the cookie that will be stored on the client's machine
 	 * @param int $expiryTime the Unix timestamp indicating the time that the cookie will expire at, i.e. usually `time() + $seconds`
 	 * @param string|null $path the path on the server that the cookie will be valid for (including all sub-directories), e.g. an empty string for the current directory or `/` for the root directory
-	 * @param string|null $domain the domain that the cookie will be valid for (including all subdomains)
+	 * @param string|null $domain the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains)
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
@@ -498,7 +498,7 @@ final class Cookie {
 		}
 	}
 
-	private static function normalizeDomain($domain, $keepWww = false) {
+	private static function normalizeDomain($domain = null, $keepWww = false) {
 		// make sure the domain is actually a string
 		$domain = (string) $domain;
 
