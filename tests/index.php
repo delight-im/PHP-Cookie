@@ -108,10 +108,8 @@ require __DIR__.'/../vendor/autoload.php';
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.local'), 'Set-Cookie: key=value; path=/; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
-\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('www.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
-\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com'), 'Set-Cookie: key=value; path=/; domain=.example.com; httponly; SameSite=Lax');
-\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('www.example.com', true), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
-\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com', true), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
+\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('www.example.com'), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
+\testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com'), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
 

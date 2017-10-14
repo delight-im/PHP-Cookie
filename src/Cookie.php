@@ -166,11 +166,10 @@ final class Cookie {
 	 * Sets the domain for the cookie
 	 *
 	 * @param string|null $domain the domain that the cookie will be valid for (including subdomains) or `null` for the current host (excluding subdomains)
-	 * @param bool $keepWww whether a leading `www` subdomain must be preserved or not
 	 * @return static this instance for chaining
 	 */
-	public function setDomain($domain = null, $keepWww = false) {
-		$this->domain = self::normalizeDomain($domain, $keepWww);
+	public function setDomain($domain = null) {
+		$this->domain = self::normalizeDomain($domain);
 
 		return $this;
 	}
@@ -396,7 +395,7 @@ final class Cookie {
 						$cookie->setExpiryTime((int) \strtotime(\substr($attribute, 8)));
 					}
 					elseif (\stripos($attribute, 'Domain=') === 0) {
-						$cookie->setDomain(\substr($attribute, 7), true);
+						$cookie->setDomain(\substr($attribute, 7));
 					}
 					elseif (\stripos($attribute, 'Path=') === 0) {
 						$cookie->setPath(\substr($attribute, 5));
@@ -498,7 +497,7 @@ final class Cookie {
 		}
 	}
 
-	private static function normalizeDomain($domain = null, $keepWww = false) {
+	private static function normalizeDomain($domain = null) {
 		// make sure that the domain is a string
 		$domain = (string) $domain;
 
@@ -524,15 +523,6 @@ final class Cookie {
 		if ($domain[0] !== '.') {
 			// prepend a dot for maximum compatibility (e.g. with RFC 2109)
 			$domain = '.' . $domain;
-		}
-
-		// if a leading `www` subdomain may be dropped
-		if (!$keepWww) {
-			// if the domain name actually starts with a `www` subdomain
-			if (\substr($domain, 0, 5) === '.www.') {
-				// strip that subdomain
-				$domain = \substr($domain, 4);
-			}
 		}
 
 		// return the normalized domain
