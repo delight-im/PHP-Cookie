@@ -499,7 +499,7 @@ final class Cookie {
 	}
 
 	private static function normalizeDomain($domain = null, $keepWww = false) {
-		// make sure the domain is actually a string
+		// make sure that the domain is a string
 		$domain = (string) $domain;
 
 		// if the cookie should be valid for the current host only
