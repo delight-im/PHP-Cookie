@@ -23,6 +23,10 @@ namespace Delight\Cookie;
  */
 final class Cookie {
 
+	/** @var string name prefix indicating that the cookie must be from a secure origin (i.e. HTTPS) and the 'secure' attribute must be set */
+	const PREFIX_SECURE = '__Secure-';
+	/** @var string name prefix indicating that the 'domain' attribute must *not* be set, the 'path' attribute must be '/' and the effects of {@see PREFIX_SECURE} apply as well */
+	const PREFIX_HOST = '__Host-';
 	const HEADER_PREFIX = 'Set-Cookie: ';
 	const SAME_SITE_RESTRICTION_LAX = 'Lax';
 	const SAME_SITE_RESTRICTION_STRICT = 'Strict';
