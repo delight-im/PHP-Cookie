@@ -1,5 +1,9 @@
 # Migration
 
+## General
+
+Update your version of this library using Composer and its `composer update` or `composer require` commands [[?]](https://github.com/delight-im/Knowledge/blob/master/Composer%20(PHP).md#how-do-i-update-libraries-or-modules-within-my-application).
+
 ## From `v2.x.x` to `v3.x.x`
 
  * The default domain scope for new `Cookie` instances is still the current host, but it does not include subdomains anymore, unless explicitly specified otherwise via the `Cookie#setDomain` method.
