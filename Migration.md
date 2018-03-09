@@ -8,7 +8,7 @@ Update your version of this library using Composer and its `composer update` or 
 
  * The default domain scope for new `Cookie` instances is still the current host, but it does not include subdomains anymore, unless explicitly specified otherwise via the `Cookie#setDomain` method.
  * For the domain scope, `www` subdomains are not automatically widened to the bare domain anymore. If you want to include the bare domain and all subdomains in addition to the `www` subdomain, you must now explicitly specifiy the bare domain instead of the `www` subdomain as the scope.
- * When managing sessions via the methods `Session#start` or `Session#regenerate`, the session configuration is now correctly respected with regard to whether subdomains should be includeed in the domain scope or not. The scope is not automatically widened to include subdomains anymore.
+ * When managing sessions via the methods `Session#start` or `Session#regenerate`, the session configuration is now correctly respected with regard to whether subdomains should be included in the domain scope or not. The scope is not automatically widened to include subdomains anymore.
  * The second parameter of the `Cookie#setDomain` method, which was named `$keepWww`, has been removed.
  * When creating `Cookie` instances from a string using the `Cookie#parse` method, the source’s decision of whether to include subdomains in the domain scope or not is now correctly respected. The scope is not automatically widened to include subdomains anymore.
 
