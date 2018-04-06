@@ -28,7 +28,7 @@ Migrating from an earlier version of this project? See our [upgrade guide](Migra
 
 ### Static method
 
-This library provides a static method that is compatible to PHP’s built-in `setcookie(...)` function but includes support for more recent features such as the [`SameSite`](http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-same-site.html) attribute:
+This library provides a static method that is compatible to PHP’s built-in `setcookie(...)` function but includes support for more recent features such as the `SameSite` attribute:
 
 ```php
 \Delight\Cookie\Cookie::setcookie('SID', '31d4d96e407aad42');
@@ -183,7 +183,7 @@ $cookieInstance = \Delight\Cookie\Cookie::parse($cookieHeader);
 
  * [RFC 2109](https://tools.ietf.org/html/rfc2109)
  * [RFC 6265](https://tools.ietf.org/html/rfc6265)
- * [Same-site Cookies](http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-same-site.html)
+ * [Same-site Cookies](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-02) (formerly [2016-06-20](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) and [2016-04-06](https://tools.ietf.org/html/draft-west-first-party-cookies-07))
 
 ## Contributing
 
