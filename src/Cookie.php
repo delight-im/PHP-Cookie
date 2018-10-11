@@ -378,8 +378,12 @@ final class Cookie {
 		}
 
 		if (\preg_match('/^' . self::HEADER_PREFIX . '(.*?)=(.*?)(?:; (.*?))?$/i', $cookieHeader, $matches)) {
-			if (\count($matches) >= 4) {
-				$attributes = \explode('; ', $matches[3]);
+			if (\count($matches) >= 3) {
+				$attributes = \explode('; ', $matches[2]);
+
+				if(\count($matches) > 3) {
+					$attributes = \explode('; ', $matches[3]);
+				}
 
 				$cookie = new self($matches[1]);
 				$cookie->setPath(null);
