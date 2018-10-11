@@ -117,7 +117,7 @@ require __DIR__.'/../vendor/autoload.php';
 \setcookie('hello', 'world', \time() + 86400, '/foo/', 'example.com', true, true);
 $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-Cookie'));
 
-\testEqual($cookie, (new \Delight\Cookie\Cookie('hello'))->setValue('world')->setMaxAge(86400)->setPath('/foo/')->setDomain('example.com')->setHttpOnly(true)->setSecureOnly(true));
+\testEqual($cookie, (new \Delight\Cookie\Cookie('hello'))->setValue('world')->setMaxAge(86400)->setPath('/foo/')->setDomain('example.com')->setHttpOnly(true)->setSecureOnly(true)->setSameSiteRestriction(null));
 
 ($cookie->getName() === 'hello') or \fail(__LINE__);
 ($cookie->getValue() === 'world') or \fail(__LINE__);
@@ -127,7 +127,7 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 ($cookie->getDomain() === '.example.com') or \fail(__LINE__);
 ($cookie->isHttpOnly() === true) or \fail(__LINE__);
 ($cookie->isSecureOnly() === true) or \fail(__LINE__);
-($cookie->getSameSiteRestriction() === \Delight\Cookie\Cookie::SAME_SITE_RESTRICTION_LAX) or \fail(__LINE__);
+($cookie->getSameSiteRestriction() === null) or \fail(__LINE__);
 
 \testEqual(\Delight\Cookie\Cookie::exists('SESSID'), isset($_COOKIE['SESSID']));
 \testEqual(\Delight\Cookie\Cookie::exists('other'), isset($_COOKIE['other']));
