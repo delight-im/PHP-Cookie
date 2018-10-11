@@ -384,6 +384,7 @@ final class Cookie {
 			$cookie->setValue(
 				\urldecode($matches[2])
 			);
+			$cookie->setSameSiteRestriction(null);
 
 			if (\count($matches) >= 4) {
 				$attributes = \explode('; ', $matches[3]);
@@ -403,6 +404,9 @@ final class Cookie {
 					}
 					elseif (\stripos($attribute, 'Path=') === 0) {
 						$cookie->setPath(\substr($attribute, 5));
+					}
+					elseif (\stripos($attribute, 'SameSite=') === 0) {
+						$cookie->setSameSiteRestriction(\substr($attribute, 9));
 					}
 				}
 			}
