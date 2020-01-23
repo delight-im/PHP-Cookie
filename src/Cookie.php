@@ -30,6 +30,7 @@ final class Cookie {
 	const HEADER_PREFIX = 'Set-Cookie: ';
 	const SAME_SITE_RESTRICTION_LAX = 'Lax';
 	const SAME_SITE_RESTRICTION_STRICT = 'Strict';
+	const SAME_SITE_RESTRICTION_NONE = 'None';
 
 	/** @var string the name of the cookie which is also the key for future accesses via `$_COOKIE[...]` */
 	private $name;
@@ -361,6 +362,9 @@ final class Cookie {
 		}
 		elseif ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_STRICT) {
 			$headerStr .= '; SameSite=Strict';
+		}
+		elseif ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_NONE) {
+			$headerStr .= '; SameSite=None';
 		}
 
 		return $headerStr;
