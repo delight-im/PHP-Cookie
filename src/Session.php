@@ -24,7 +24,7 @@ final class Session {
 	/**
 	 * Starts or resumes a session in a way compatible to PHP's built-in `session_start()` function
 	 *
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
 	public static function start($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
@@ -59,7 +59,7 @@ final class Session {
 	 * Re-generates the session ID in a way compatible to PHP's built-in `session_regenerate_id()` function
 	 *
 	 * @param bool $deleteOldSession whether to delete the old session or not
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
 	public static function regenerate($deleteOldSession = false, $sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// run PHP's built-in equivalent
@@ -141,7 +141,7 @@ final class Session {
 	/**
 	 * Intercepts and rewrites the session cookie header
 	 *
-	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `Lax` or `Strict`)
+	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
 	 */
 	private static function rewriteCookieHeader($sameSiteRestriction = Cookie::SAME_SITE_RESTRICTION_LAX) {
 		// get and remove the original cookie header set by PHP
