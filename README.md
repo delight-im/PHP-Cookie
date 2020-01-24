@@ -99,6 +99,8 @@ Using the `Session` class, you can start and resume sessions in a way that is co
 
 // start session and have session cookie without any same-site restriction
 \Delight\Cookie\Session::start(null);
+// or
+\Delight\Cookie\Session::start('None'); // Chrome 80+
 ```
 
 All three calls respect the settings from PHP’s `session_set_cookie_params(...)` function and the configuration options `session.name`, `session.cookie_lifetime`, `session.cookie_path`, `session.cookie_domain`, `session.cookie_secure`, `session.cookie_httponly` and `session.use_cookies`.
