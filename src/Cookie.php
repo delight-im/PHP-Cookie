@@ -358,6 +358,11 @@ final class Cookie {
 		}
 
 		if ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_NONE) {
+			// if the 'secure' attribute is missing
+			if (!$secureOnly) {
+				\trigger_error('When the \'SameSite\' attribute is set to \'None\', the \'secure\' attribute should be set as well', \E_USER_WARNING);
+			}
+
 			$headerStr .= '; SameSite=None';
 		}
 		elseif ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_LAX) {
