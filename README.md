@@ -57,7 +57,7 @@ $cookie->save();
 The method calls can also be chained:
 
 ```php
-(new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setMaxAge(60 * 60 * 24)->setSameSiteRestriction('Strict')->save();
+(new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setMaxAge(60 * 60 * 24)->setSameSiteRestriction('None')->save();
 ```
 
 A cookie can later be deleted simply like this:
