@@ -368,7 +368,7 @@ final class Cookie {
 			//  According to Chrome 80+, secure should be set if SameSite is `None`
 			try {
 				if ($secureOnly != true) {
-					throw new Exception('SecureOnly should be set on true if SameSite is set to `None`');
+					throw new \Exception('SecureOnly should be set on true if SameSite is set to `None`');
 				}
 				$headerStr .= '; SameSite=None';
 			} catch (\Exception $e) {
