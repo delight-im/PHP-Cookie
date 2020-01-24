@@ -186,6 +186,7 @@ $cookieInstance = \Delight\Cookie\Cookie::parse($cookieHeader);
  * [RFC 2109](https://tools.ietf.org/html/rfc2109)
  * [RFC 6265](https://tools.ietf.org/html/rfc6265)
  * [Same-site Cookies](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-04) (formerly [2016-06-20](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) and [2016-04-06](https://tools.ietf.org/html/draft-west-first-party-cookies-07))
+   * [Amendment](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00): [Default to `Lax`](https://chromestatus.com/feature/5088147346030592) and [require `secure` attribute for `None`](https://chromestatus.com/feature/5633521622188032) (Note: There are [incompatible clients](https://www.chromium.org/updates/same-site/incompatible-clients))
 
 ## Contributing
 
