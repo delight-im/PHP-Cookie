@@ -28,6 +28,7 @@ final class Cookie {
 	/** @var string name prefix indicating that the 'domain' attribute must *not* be set, the 'path' attribute must be '/' and the effects of {@see PREFIX_SECURE} apply as well */
 	const PREFIX_HOST = '__Host-';
 	const HEADER_PREFIX = 'Set-Cookie: ';
+	const SAME_SITE_RESTRICTION_NONE = 'None';
 	const SAME_SITE_RESTRICTION_LAX = 'Lax';
 	const SAME_SITE_RESTRICTION_STRICT = 'Strict';
 
@@ -356,7 +357,10 @@ final class Cookie {
 			$headerStr .= '; httponly';
 		}
 
-		if ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_LAX) {
+		if ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_NONE) {
+			$headerStr .= '; SameSite=None';
+		}
+		elseif ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_LAX) {
 			$headerStr .= '; SameSite=Lax';
 		}
 		elseif ($sameSiteRestriction === self::SAME_SITE_RESTRICTION_STRICT) {
