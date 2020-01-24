@@ -185,7 +185,7 @@ $cookieInstance = \Delight\Cookie\Cookie::parse($cookieHeader);
 
  * [RFC 2109](https://tools.ietf.org/html/rfc2109)
  * [RFC 6265](https://tools.ietf.org/html/rfc6265)
- * [Same-site Cookies](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-02) (formerly [2016-06-20](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) and [2016-04-06](https://tools.ietf.org/html/draft-west-first-party-cookies-07))
+ * [Same-site Cookies](https://tools.ietf.org/html/draft-ietf-httpbis-rfc6265bis-04) (formerly [2016-06-20](https://tools.ietf.org/html/draft-ietf-httpbis-cookie-same-site-00) and [2016-04-06](https://tools.ietf.org/html/draft-west-first-party-cookies-07))
 
 ## Contributing
 
