@@ -101,6 +101,8 @@ require __DIR__.'/../vendor/autoload.php';
 \testCookie('cookie[three]', 'cookiethree');
 \testCookie('cookie[two]', 'cookietwo');
 \testCookie('cookie[one]', 'cookieone');
+\testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setSameSiteRestriction('None'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None');
+\testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setDomain('localhost')->setSameSiteRestriction('None'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None');
 \testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setSameSiteRestriction('Strict'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict');
 \testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setDomain('localhost')->setSameSiteRestriction('Strict'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('localhost'), 'Set-Cookie: key=value; path=/; httponly; SameSite=Lax');
@@ -117,6 +119,7 @@ require __DIR__.'/../vendor/autoload.php';
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID'), '');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42'), 'Set-Cookie: SID=31d4d96e407aad42');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; httponly'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly');
+\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict');
 
 \setcookie('hello', 'world', \time() + 86400, '/foo/', 'example.com', true, true);
