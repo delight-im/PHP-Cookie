@@ -198,6 +198,7 @@ $oldSessionId = \Delight\Cookie\Session::id();
 (\Delight\Cookie\Session::has('key2') === false) or \fail(__LINE__);
 
 \session_destroy();
+\Delight\Http\ResponseHeader::take('Set-Cookie');
 
 /* END TEST SESSION */
 
