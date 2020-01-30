@@ -154,6 +154,10 @@ final class Session {
 
 			// if the cookie has successfully been parsed
 			if (isset($parsedCookie)) {
+				// if same-site is 'None' add secure
+				if($sameSiteRestriction == Cookie::SAME_SITE_RESTRICTION_NONE) {
+					$parsedCookie->setSecureOnly(true);
+				}
 				// apply the supplied same-site restriction
 				$parsedCookie->setSameSiteRestriction($sameSiteRestriction);
 				// save the cookie
