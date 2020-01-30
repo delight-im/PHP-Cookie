@@ -156,6 +156,11 @@ final class Session {
 			if (isset($parsedCookie)) {
 				// apply the supplied same-site restriction
 				$parsedCookie->setSameSiteRestriction($sameSiteRestriction);
+
+				if ($parsedCookie->getSameSiteRestriction() === Cookie::SAME_SITE_RESTRICTION_NONE && !$parsedCookie->isSecureOnly()) {
+					\trigger_error('You may have to enable the \'session.cookie_secure\' directive in the configuration in \'php.ini\' or via the \'ini_set\' function', \E_USER_WARNING);
+				}
+
 				// save the cookie
 				$parsedCookie->save();
 			}
