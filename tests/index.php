@@ -156,6 +156,26 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 (\Delight\Cookie\Session::id() === '') or \fail(__LINE__);
 
 \Delight\Cookie\Session::start();
+$sessionCookieReferenceHeader = \Delight\Http\ResponseHeader::take('Set-Cookie');
+session_write_close();
+
+\Delight\Cookie\Session::start(null);
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), \str_replace('; SameSite=Lax', '', $sessionCookieReferenceHeader));
+session_write_close();
+
+@\Delight\Cookie\Session::start('None');
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), \str_replace('; SameSite=Lax', '; SameSite=None', $sessionCookieReferenceHeader));
+session_write_close();
+
+\Delight\Cookie\Session::start('Lax');
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), $sessionCookieReferenceHeader);
+session_write_close();
+
+\Delight\Cookie\Session::start('Strict');
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), \str_replace('; SameSite=Lax', '; SameSite=Strict', $sessionCookieReferenceHeader));
+session_write_close();
+
+\Delight\Cookie\Session::start();
 
 (isset($_SESSION) === true) or \fail(__LINE__);
 (\Delight\Cookie\Session::id() !== '') or \fail(__LINE__);
