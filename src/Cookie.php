@@ -259,8 +259,12 @@ final class Cookie {
 	public function delete() {
 		// create a temporary copy of this cookie so that it isn't corrupted
 		$copiedCookie = clone $this;
+		
 		// set the copied cookie's value to an empty string which internally sets the required options for a deletion
 		$copiedCookie->setValue('');
+		
+		// unset the cookie name from PHP's $_COOKIE variable in case it is checked later in the code before headers are sent
+		unset($_COOKIE[$this->getName()]);
 
 		// save the copied "deletion" cookie
 		return $copiedCookie->save();
