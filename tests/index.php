@@ -148,6 +148,26 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 \testEqual(\Delight\Cookie\Cookie::get('other'), (isset($_COOKIE['other']) ? $_COOKIE['other'] : null));
 \testEqual(\Delight\Cookie\Cookie::get('other', 42), (isset($_COOKIE['other']) ? $_COOKIE['other'] : 42));
 
+!isset($_COOKIE['cefa389e458b']) or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('cefa389e458b'))->setValue('a858c4a03224')->save();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: cefa389e458b=a858c4a03224; path=/; httponly; SameSite=Lax');
+!isset($_COOKIE['cefa389e458b']) or \fail(__LINE__);
+
+!isset($_COOKIE['c0f3a2ea81aa']) or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('c0f3a2ea81aa'))->setValue('dabf2c1490a5')->setDomain('example.com')->save();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: c0f3a2ea81aa=dabf2c1490a5; path=/; domain=.example.com; httponly; SameSite=Lax');
+!isset($_COOKIE['c0f3a2ea81aa']) or \fail(__LINE__);
+
+!isset($_COOKIE['c19718a89afd']) or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('c19718a89afd'))->setValue('f638cfcf49a8')->saveAndSet();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: c19718a89afd=f638cfcf49a8; path=/; httponly; SameSite=Lax');
+(isset($_COOKIE['c19718a89afd']) && $_COOKIE['c19718a89afd'] === 'f638cfcf49a8') or \fail(__LINE__);
+
+!isset($_COOKIE['b377b18ca9e6']) or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('b377b18ca9e6'))->setValue('dbeaebb92e43')->setDomain('example.com')->saveAndSet();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: b377b18ca9e6=dbeaebb92e43; path=/; domain=.example.com; httponly; SameSite=Lax');
+(isset($_COOKIE['b377b18ca9e6']) && $_COOKIE['b377b18ca9e6'] === 'dbeaebb92e43') or \fail(__LINE__);
+
 /* END TEST COOKIES */
 
 /* BEGIN TEST SESSION */
