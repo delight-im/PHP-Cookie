@@ -168,6 +168,34 @@ $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-
 \testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: b377b18ca9e6=dbeaebb92e43; path=/; domain=.example.com; httponly; SameSite=Lax');
 (isset($_COOKIE['b377b18ca9e6']) && $_COOKIE['b377b18ca9e6'] === 'dbeaebb92e43') or \fail(__LINE__);
 
+$_COOKIE['a8a78153b857'] = 'ed2e8ff8629f';
+(isset($_COOKIE['a8a78153b857']) && $_COOKIE['a8a78153b857'] === 'ed2e8ff8629f') or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('a8a78153b857'))->delete();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: a8a78153b857=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; httponly; SameSite=Lax');
+(isset($_COOKIE['a8a78153b857']) && $_COOKIE['a8a78153b857'] === 'ed2e8ff8629f') or \fail(__LINE__);
+unset($_COOKIE['a8a78153b857']);
+
+$_COOKIE['c5dd45883e4b'] = 'b42f7c9de3dd';
+(isset($_COOKIE['c5dd45883e4b']) && $_COOKIE['c5dd45883e4b'] === 'b42f7c9de3dd') or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('c5dd45883e4b'))->setDomain('example.com')->delete();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: c5dd45883e4b=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; domain=.example.com; httponly; SameSite=Lax');
+(isset($_COOKIE['c5dd45883e4b']) && $_COOKIE['c5dd45883e4b'] === 'b42f7c9de3dd') or \fail(__LINE__);
+unset($_COOKIE['c5dd45883e4b']);
+
+$_COOKIE['ed050c7d7e62'] = 'a8b362c78a04';
+(isset($_COOKIE['ed050c7d7e62']) && $_COOKIE['ed050c7d7e62'] === 'a8b362c78a04') or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('ed050c7d7e62'))->deleteAndUnset();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: ed050c7d7e62=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; httponly; SameSite=Lax');
+!isset($_COOKIE['ed050c7d7e62']) or \fail(__LINE__);
+unset($_COOKIE['ed050c7d7e62']);
+
+$_COOKIE['c8f13ff2a8ad'] = 'cd0a70b224e8';
+(isset($_COOKIE['c8f13ff2a8ad']) && $_COOKIE['c8f13ff2a8ad'] === 'cd0a70b224e8') or \fail(__LINE__);
+(new \Delight\Cookie\Cookie('c8f13ff2a8ad'))->setDomain('example.com')->deleteAndUnset();
+\testEqual(\Delight\Http\ResponseHeader::take('Set-Cookie'), 'Set-Cookie: c8f13ff2a8ad=deleted; expires=Thu, 01-Jan-1970 00:00:01 GMT; Max-Age=0; path=/; domain=.example.com; httponly; SameSite=Lax');
+!isset($_COOKIE['c8f13ff2a8ad']) or \fail(__LINE__);
+unset($_COOKIE['c8f13ff2a8ad']);
+
 /* END TEST COOKIES */
 
 /* BEGIN TEST SESSION */
