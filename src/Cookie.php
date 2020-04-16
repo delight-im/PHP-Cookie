@@ -252,6 +252,19 @@ final class Cookie {
 	}
 
 	/**
+	 * Saves the cookie and immediately creates the corresponding variable in the superglobal `$_COOKIE` array
+	 *
+	 * The variable would otherwise only be available starting from the next HTTP request
+	 *
+	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to set the cookie)
+	 */
+	public function saveAndSet() {
+		$_COOKIE[$this->name] = $this->value;
+
+		return $this->save();
+	}
+
+	/**
 	 * Deletes the cookie
 	 *
 	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to delete the cookie)
