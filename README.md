@@ -54,6 +54,8 @@ $cookie->setSameSiteRestriction('Strict');
 // echo $cookie;
 // or
 $cookie->save();
+// or
+$cookie->saveAndSet();
 ```
 
 The method calls can also be chained:
