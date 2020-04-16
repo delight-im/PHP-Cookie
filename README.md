@@ -66,7 +66,7 @@ A cookie can later be deleted simply like this:
 $cookie->delete();
 ```
 
-**Note:** For the deletion to work, the cookie must have the same settings as the cookie that was originally saved. So you should remember to pass appropriate values to `setPath(...)`, `setDomain(...)`, `setHttpOnly(...)` and `setSecureOnly(...)` again.
+**Note:** For the deletion to work, the cookie must have the same settings as the cookie that was originally saved – except for its value, which doesn’t need to be set. So you should remember to pass appropriate values to `setPath(...)`, `setDomain(...)`, `setHttpOnly(...)` and `setSecureOnly(...)` again.
 
 ### Reading cookies
 
