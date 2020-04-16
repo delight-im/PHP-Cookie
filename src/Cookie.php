@@ -279,6 +279,19 @@ final class Cookie {
 		return $copiedCookie->save();
 	}
 
+	/**
+	 * Deletes the cookie and immediately removes the corresponding variable from the superglobal `$_COOKIE` array
+	 *
+	 * The variable would otherwise only be deleted at the start of the next HTTP request
+	 *
+	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to delete the cookie)
+	 */
+	public function deleteAndUnset() {
+		unset($_COOKIE[$this->name]);
+
+		return $this->delete();
+	}
+
 	public function __toString() {
 		return self::buildCookieHeader($this->name, $this->value, $this->expiryTime, $this->path, $this->domain, $this->secureOnly, $this->httpOnly, $this->sameSiteRestriction);
 	}
