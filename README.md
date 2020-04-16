@@ -50,7 +50,9 @@ $cookie->setDomain('example.com');
 $cookie->setHttpOnly(true);
 $cookie->setSecureOnly(true);
 $cookie->setSameSiteRestriction('Strict');
+
 // echo $cookie;
+// or
 $cookie->save();
 ```
 
