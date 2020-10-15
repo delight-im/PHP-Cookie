@@ -125,6 +125,10 @@ require __DIR__.'/../vendor/autoload.php';
 @\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=None');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; secure; httponly; SameSite=None'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; secure; httponly; SameSite=None');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict'), 'Set-Cookie: SID=31d4d96e407aad42; path=/; httponly; SameSite=Strict');
+\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: __Host-foo=e3328c803834'), 'Set-Cookie: __Host-foo=e3328c803834');
+\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: __%48ost-foo=e3328c803834'), 'Set-Cookie: __%48ost-foo=e3328c803834');
+\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: __Secure-foo=e3328c803834'), 'Set-Cookie: __Secure-foo=e3328c803834');
+\testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: __%53ecure-foo=e3328c803834'), 'Set-Cookie: __%53ecure-foo=e3328c803834');
 
 \setcookie('hello', 'world', \time() + 86400, '/foo/', 'example.com', true, true);
 $cookie = \Delight\Cookie\Cookie::parse(\Delight\Http\ResponseHeader::take('Set-Cookie'));
