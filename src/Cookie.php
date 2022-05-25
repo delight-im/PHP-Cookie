@@ -354,7 +354,7 @@ final class Cookie {
 		$maxAgeStr = self::formatMaxAge($expiryTime, $forceShowExpiry);
 		$expiryTimeStr = self::formatExpiryTime($expiryTime, $forceShowExpiry);
 
-		$headerStr = self::HEADER_PREFIX . $name . '=' . \urlencode($value);
+		$headerStr = self::HEADER_PREFIX . $name . '=' . \rawurlencode($value);
 
 		if (!\is_null($expiryTimeStr)) {
 			$headerStr .= '; expires=' . $expiryTimeStr;
