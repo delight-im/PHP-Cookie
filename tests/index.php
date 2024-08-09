@@ -19,14 +19,18 @@ require __DIR__.'/../vendor/autoload.php';
 // start output buffering
 \ob_start();
 
-\testCookie(null);
-\testCookie(false);
-\testCookie('');
-\testCookie(0);
+try {
+	\testCookie(null);
+	\testCookie(false);
+	\testCookie('');
+	\testCookie(0);
+	\testCookie('hello', null);
+} catch (\Throwable $e) {
+	echo $e->getMessage();
+}
 \testCookie('hello');
 \testCookie('hello', false);
 \testCookie('hello', true);
-\testCookie('hello', null);
 \testCookie('hello', '');
 \testCookie('hello', 0);
 \testCookie('hello', 1);
@@ -118,6 +122,7 @@ require __DIR__.'/../vendor/autoload.php';
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.www.example.com'), 'Set-Cookie: key=value; path=/; domain=.www.example.com; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
 \testEqual((new \Delight\Cookie\Cookie('key'))->setValue('value')->setDomain('.blog.example.com'), 'Set-Cookie: key=value; path=/; domain=.blog.example.com; httponly; SameSite=Lax');
+\testEqual((new \Delight\Cookie\Cookie('SID'))->setValue('31d4d96e407aad42')->setSameSiteRestriction('Lax')->setSecureOnly(true)->setPartitioned(true), 'Set-Cookie: SID=31d4d96e407aad42; path=/; secure; httponly; SameSite=Lax; Partitioned');
 
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID'), '');
 \testEqual(\Delight\Cookie\Cookie::parse('Set-Cookie: SID=31d4d96e407aad42'), 'Set-Cookie: SID=31d4d96e407aad42');

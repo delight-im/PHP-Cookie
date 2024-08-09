@@ -31,6 +31,7 @@ final class Cookie {
 	const SAME_SITE_RESTRICTION_NONE = 'None';
 	const SAME_SITE_RESTRICTION_LAX = 'Lax';
 	const SAME_SITE_RESTRICTION_STRICT = 'Strict';
+	const PARTITIONED = 'Partitioned';
 
 	/** @var string the name of the cookie which is also the key for future accesses via `$_COOKIE[...]` */
 	private $name;
@@ -48,6 +49,8 @@ final class Cookie {
 	private $secureOnly;
 	/** @var string|null indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`) */
 	private $sameSiteRestriction;
+	/** @var string|null indicates that the cookie should be partitioned to comply with CHIPS see https://developer.mozilla.org/en-US/docs/Web/Privacy/Privacy_sandbox/Partitioned_cookies */
+	private $partitioned;
 
 	/**
 	 * Prepares a new cookie
@@ -63,6 +66,7 @@ final class Cookie {
 		$this->httpOnly = true;
 		$this->secureOnly = false;
 		$this->sameSiteRestriction = self::SAME_SITE_RESTRICTION_LAX;
+		$this->partitioned = false;
 	}
 
 	/**
@@ -243,6 +247,22 @@ final class Cookie {
 	}
 
 	/**
+	 * Anything truthy passed in will set 'Partitioned' on the cookie
+	 * @param false|string|null $partitioned
+	 */
+	public function setPartitioned($partitioned)
+	{
+		if ($partitioned) {
+			$partitioned = self::PARTITIONED;
+		}
+		else {
+			$partitioned = null;
+		}
+		$this->partitioned = $partitioned;
+	}
+
+
+	/**
 	 * Saves the cookie
 	 *
 	 * @return bool whether the cookie header has successfully been sent (and will *probably* cause the client to set the cookie)
@@ -326,9 +346,10 @@ final class Cookie {
 	 * @param bool $secureOnly indicates that the cookie should be sent back by the client over secure HTTPS connections only
 	 * @param bool $httpOnly indicates that the cookie should be accessible through the HTTP protocol only and not through scripting languages
 	 * @param string|null $sameSiteRestriction indicates that the cookie should not be sent along with cross-site requests (either `null`, `None`, `Lax` or `Strict`)
+	 * @param string|null $partitioned indicates that the cookie should be partitioned for CHIPS compatibility. See https://developer.mozilla.org/en-US/docs/Web/Privacy/Privacy_sandbox/Partitioned_cookies`)
 	 * @return string the HTTP header
 	 */
-	public static function buildCookieHeader($name, $value = null, $expiryTime = 0, $path = null, $domain = null, $secureOnly = false, $httpOnly = false, $sameSiteRestriction = null) {
+	public static function buildCookieHeader($name, $value = null, $expiryTime = 0, $path = null, $domain = null, $secureOnly = false, $httpOnly = false, $sameSiteRestriction = null, $partitioned = null) {
 		if (self::isNameValid($name)) {
 			$name = (string) $name;
 		}
@@ -398,6 +419,10 @@ final class Cookie {
 			$headerStr .= '; SameSite=Strict';
 		}
 
+		if ($partitioned) {
+			$headerStr .= '; ' . self::PARTITIONED;
+		}
+
 		return $headerStr;
 	}
 
@@ -442,6 +467,9 @@ final class Cookie {
 					}
 					elseif (\stripos($attribute, 'SameSite=') === 0) {
 						$cookie->setSameSiteRestriction(\substr($attribute, 9));
+					}
+					elseif (\stripos($attribute, 'Partitioned') === 0) {
+						$cookie->setPartitioned(true);
 					}
 				}
 			}
